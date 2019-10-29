@@ -1,4 +1,4 @@
-import React , {useState, useEffect }from 'react';
+import React , {useState, useEffect, useMemo, useCallback }from 'react';
 
 function App() {
 const [tarefa, setTarefa]= useState([]);
@@ -17,10 +17,13 @@ useEffect(()=>{
   localStorage.setItem('tarefas', JSON.stringify(tarefa));
 },[tarefa]);
 
-function Adicionar(){
+const Adicionar = useCallback(() => {
   setTarefa([... tarefa, input]);
   setInput('');
-}
+},[input, tarefa])
+
+const totalTarefas = useMemo(()=>tarefa.length,[tarefa]);
+
 
 
   return (
@@ -32,6 +35,7 @@ function Adicionar(){
           ))
         }
       </ul>
+      <strong> Você tem {totalTarefas} Tarefas! </strong><br/>
       <input type='text' value={input} onChange={(e)=> setInput(e.target.value)}/>
       <button onClick={Adicionar}>Adicionar</button>
     </div>
