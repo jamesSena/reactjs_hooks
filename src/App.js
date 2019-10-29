@@ -1,5 +1,5 @@
 import React , {useState, useEffect, useMemo, useCallback }from 'react';
-
+import Routes from './routes'
 function App() {
 const [tarefa, setTarefa]= useState([]);
 
@@ -27,18 +27,8 @@ const totalTarefas = useMemo(()=>tarefa.length,[tarefa]);
 
 
   return (
-    <div className="App">
-      <ul>
-        {
-          tarefa.map(t=>(
-            <li key={t}>{t}</li>
-          ))
-        }
-      </ul>
-      <strong> Você tem {totalTarefas} Tarefas! </strong><br/>
-      <input type='text' value={input} onChange={(e)=> setInput(e.target.value)}/>
-      <button onClick={Adicionar}>Adicionar</button>
-    </div>
+    <Routes/>
+    
   );
 }
 
