@@ -1,6 +1,7 @@
-import React,{useState} from 'react';
+import React,{useState, useCallback} from 'react';
 import {FaGithub, FaPlus} from 'react-icons/fa';
-import {Container, From, SubmitButton} from './styles';
+import {Container, Form, SubmitButton} from './styles';
+import api from '../../services/api';
 
 export default function Main(){
     const[newRepo, setNewRepo]= useState('');
@@ -35,17 +36,20 @@ export default function Main(){
                 Meus Repositorios
            </h1>
 
-           <Form onSubmit={handleSubmit}>
-                <input 
-                    type="text" 
-                    placeholder="Adicionar"
-                    value={newRepo}
-                    onChange={handleinputChange}
-                    />
-                <SubmitButton >
-                    <FaPlus color="#FFF" size={14}/>
-                </SubmitButton>
-            </From>
+         
+      <Form onSubmit={handleSubmit}>
+        <input 
+        type="text" 
+        placeholder="Adicionar Repositorios"
+        value={newRepo}
+        onChange={handleinputChange}
+        />
+
+        <SubmitButton>
+          <FaPlus color="#FFF" size={14}/>
+        </SubmitButton>
+
+      </Form>
 
         </Container>
 
