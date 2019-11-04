@@ -4,6 +4,27 @@ import {Container, From, SubmitButton} from './styles';
 
 export default function Main(){
     const[newRepo, setNewRepo]= useState('');
+    const [repositorios, setRepositorios] = useState([]);
+  
+    const handleSubmit = useCallback((e)=>{
+        e.preventDefault();
+    
+        async function submit(){ 
+          const response = await api.get(`repos/${newRepo}`);
+      
+          const data = {
+            name: response.data.full_name,
+          }
+      
+          setRepositorios([...repositorios, data]);
+          setNewRepo('');
+        }
+    
+        submit();
+    
+      }, [newRepo, repositorios]);
+
+
     function handleinputChange (e){
         setNewRepo(e.target.value);
     }
@@ -14,7 +35,7 @@ export default function Main(){
                 Meus Repositorios
            </h1>
 
-           <From onSubmit={()=>{}}>
+           <Form onSubmit={handleSubmit}>
                 <input 
                     type="text" 
                     placeholder="Adicionar"
