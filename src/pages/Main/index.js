@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import { FaGithub, FaPlus, FaSpinner, FaBars, FaTrash } from 'react-icons/fa';
 import {Container, Form, SubmitButton, List, DeleteButton} from './styles';
 
@@ -16,7 +16,7 @@ export default function Main(){
       if(repoStorage){
         setRepositorios(JSON.parse(repoStorage));
       }
-    });
+    },[]);
 
     //Salvar alterações
     useEffect(()=>{
@@ -74,7 +74,7 @@ export default function Main(){
            </h1>
 
          
-      <Form onSubmit={handleSubmit}>
+           <Form onSubmit={handleSubmit} error={alert}>
         <input 
         type="text" 
         placeholder="Adicionar Repositorios"
