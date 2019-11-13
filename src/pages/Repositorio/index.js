@@ -48,13 +48,14 @@ export default function Repositorio({match}){
   }
   
   return(
+    //Voltar, usando o icon do react-icons
     <Container>
         <BackButton to="/">
           <FaArrowLeft color="#000" size={30} />
         </BackButton>
 
         <Owner>
-          <img 
+          <img //Exibindo as informações do dono do repositorio
             src={repositorio.owner.avatar_url} 
             alt={repositorio.owner.login} 
             />
@@ -62,8 +63,9 @@ export default function Repositorio({match}){
           <p>{repositorio.description}</p>
         </Owner>
 
+      
         <IssuesList>
-          {issues.map(issue => (
+          {issues.map(issue => (//Exibindo a lista de problemas
             <li key={String(issue.id)}>
               <img src={issue.user.avatar_url} alt={issue.user.login} />
 
