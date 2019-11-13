@@ -53,6 +53,11 @@ export const BackButton = styled(Link)`
   border:0;
   outline:0;
   background: transparent;
+  transform: 0.3s;
+
+  &:hover{
+    color: #0071db;
+  }
 `;
 
 export const IssuesList = styled.ul`
@@ -118,5 +123,28 @@ export const IssuesList = styled.ul`
 
   }
 
+
+`;
+
+
+export const PageActions = styled.div`
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+
+  button{
+    outline:0;
+    border:0;
+    background: #222;
+    color: #FFF;
+    padding: 5px 10px;
+    border-radius: 4px;
+
+    &:disabled{
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+  }
 
 `;

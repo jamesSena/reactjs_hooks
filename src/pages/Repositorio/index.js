@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Container, Owner, Loading, BackButton, IssuesList} from './styles';
+import {Container, Owner, Loading, BackButton, IssuesList, PageActions} from './styles';
 import { FaArrowLeft } from 'react-icons/fa';
 import api from '../../services/api';
 
@@ -8,6 +8,7 @@ export default function Repositorio({match}){
   const [repositorio, setRepositorio] = useState({});
   const [issues, setIssues] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
 
   useEffect(()=> {
     
@@ -38,6 +39,10 @@ export default function Repositorio({match}){
 
   }, [match.params.repositorio]);
 
+ 
+  function handlePage(action){
+    setPage(action === 'back' ? page - 1 : page + 1 )
+  }
   //Se as informações ainda não estão carregadas, retornar uma mensagem
   if(loading){
     return(
@@ -52,6 +57,7 @@ export default function Repositorio({match}){
     <Container>
         <BackButton to="/">
           <FaArrowLeft color="#000" size={30} />
+          Voltar
         </BackButton>
 
         <Owner>
@@ -86,7 +92,20 @@ export default function Repositorio({match}){
             </li>
           ))}
         </IssuesList>
+        <PageActions>
+          <button 
+          type="button" 
+          onClick={()=> handlePage('back') }
+          disabled={page < 2}
+          >
+            Voltar
+          </button>
 
+          <button type="button" onClick={()=> handlePage('next') }>
+            Proxima
+          </button>
+        </PageActions>
     </Container>
+    
   )
 }
