@@ -39,6 +39,28 @@ export default function Repositorio({match}){
 
   }, [match.params.repositorio]);
 
+  useEffect(()=> {
+    console.log("Alterou o status do componente PAGE");
+
+    async function loadIssue(){
+      const nomeRepo = decodeURIComponent(match.params.repositorio);
+
+      const response = await api.get(`/repos/${nomeRepo}/issues`, {
+        params:{
+          state: 'open',
+          page:page,
+          per_page: 5,
+        },
+      });
+
+      setIssues(response.data);
+
+    }
+
+    loadIssue();
+
+  }, [page]);
+
  
   function handlePage(action){
     setPage(action === 'back' ? page - 1 : page + 1 )
